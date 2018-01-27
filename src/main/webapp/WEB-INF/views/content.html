@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout">
+<body layout:fragment="content">
+    <div th:include="messages :: messages"></div>
+    <section class="content-header">
+        <h1>{{ pageTitle | translate }}</h1>
+    </section>
+    <div ng-view></div>
+</body>
+</html>

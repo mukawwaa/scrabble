@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="layout">
+<body>
+    <aside class="main-sidebar" th:fragment="sidebar">
+        <section class="sidebar">
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img th:src="@{/image/avatar}" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p sec:authentication="name"></p>
+                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                </div>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="header">Navigation</li>
+                <li class="active treeview">
+                    <a th:href="@{/v/createBoard}"><i class="fa fa-dashboard"></i><span>{{'menu_newGame' | translate}}</span></a>
+                    <a th:href="@{/v/boards}"><i class="fa fa-dashboard"></i><span>{{'menu_activeGames' | translate}}</span></a>
+                    <a th:href="@{/v/myBoards}"><i class="fa fa-dashboard"></i><span>{{'menu_myGames' | translate}}</span></a>
+                </li>
+            </ul>
+        </section>
+    </aside>
+</body>
+</html>

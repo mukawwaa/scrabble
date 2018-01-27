@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org" lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Scrabble | Log in</title>
+<!-- Tell the browser to be responsive to screen width -->
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<!-- Bootstrap 3.3.6 -->
+<link rel="stylesheet" th:href="@{/resources/css/bootstrap.min.css}">
+<!-- Font Awesome 4.5.0 -->
+<link rel="stylesheet" th:href="@{/resources/css/font-awesome.min.css}">
+<!-- Ionicons 2.0.1 -->
+<link rel="stylesheet" th:href="@{/resources/css/ionicons.min.css}">
+<!-- Theme style -->
+<link rel="stylesheet" th:href="@{/resources/css/admin-lte.css}">
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="#"><b>Scrabble</b></a>
+        </div>
+        <div class="login-box-body">
+            <p class="login-box-msg">Sign in to start your session</p>
+
+            <form th:action="@{/login}" method="post">
+                <div class="form-group has-feedback">
+                    <input type="username" name="username" class="form-control" placeholder="Username">
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input type="password" name="password" class="form-control" placeholder="Password">
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-8">
+                        <div class="checkbox">
+                            <label><input type="checkbox">Remember Me</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <script th:src="@{/resources/js/library/jquery.js}"></script>
+    <script th:src="@{/resources/js/library/bootstrap.js}"></script>
+</body>
+</html>

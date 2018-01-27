@@ -1,0 +1,113 @@
+.game-body {
+    padding: 5px;
+}
+
+.game-table {
+    border-collapse: collapse;
+    border-top: 2px solid #d8d8d8;
+    border-bottom: 2px solid #d8d8d8;
+    -moz-box-shadow: 0px 3px 20px #000;
+    -webkit-box-shadow: 0px 3px 20px #000;
+    box-shadow: 0px 3px 20px #000;
+}
+
+.tile-div {
+    background-color: #f6e1a6;
+    background: -webkit-gradient(linear, 100% 100%, 0% 5%, from(#d8bd72), to(#fae1a6));
+    border-radius: 7px;
+    box-shadow: 0px 0px 5px #a000;
+    text-align: center;
+    border-top-width: 1px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 1px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-top-color: #f8e6b1;
+    border-right-color: #f8e6b1;
+    border-bottom-color: #cab06b;
+    border-left-color: #f8e6b1;
+    user-select: none
+}
+
+.letter-tile {
+    font-family: 'Asap', serif;
+    font-weight: normal;
+    color: #272832;
+    text-shadow: 1px 1px 0px #fff5d7;
+    margin: 0px;
+}
+
+.score-tile {
+    font-family: 'Asap', serif;
+    font-weight: normal;
+    color: #272832;
+    text-shadow: 1px 1px 0px #fff5d7;
+    margin: 0px;
+}
+
+@media screen and (min-width: 991px) {
+    .game-table {
+        width: 630px;
+    }
+    .tile-td {
+        width: 41px;
+        height: 41px;
+    }
+    .tile-div {
+        height: 41px;
+        width: 41px;
+    }
+    .letter-tile {
+        font-size: 32px;
+        position: relative;
+        bottom: 5px;
+    }
+    .score-tile {
+        font-size: 12px;
+        position: relative;
+        bottom: 5px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .game-table {
+        width: 330px;
+    }
+    .tile-td {
+        width: 21px;
+        height: 21px;
+    }
+    .tile-div {
+        height: 21px;
+        width: 21px;
+    }
+    .letter-tile {
+        font-size: 16px;
+        position: relative;
+        bottom: 2px;
+    }
+    .score-tile {
+        font-size: 6px;
+        position: relative;
+        bottom: 2px;
+        right: 2px;
+    }
+}
+
+.game-table th {
+    border-right: 2px solid #d8d8d8;
+    border-left: 2px solid #d8d8d8;
+}
+
+.game-table td {
+    border-right: 2px solid #d8d8d8;
+    border-left: 2px solid #d8d8d8;
+    border-top: 2px solid #d8d8d8;
+}
+
+.rack-button-body {
+    text-align: center;
+}

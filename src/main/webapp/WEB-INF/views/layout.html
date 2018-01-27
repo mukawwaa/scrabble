@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<base href="/scrabble/">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Scrabble</title>
+<!-- Tell the browser to be responsive to screen width -->
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<!-- custom -->
+<link rel="stylesheet" th:href="@{/resources/css/wortera.css}">
+<!-- Bootstrap 3.3.6 -->
+<link rel="stylesheet" th:href="@{/resources/css/bootstrap.min.css}">
+<!-- Font Awesome -->
+<link rel="stylesheet" th:href="@{/resources/css/font-awesome.min.css}">
+<!-- Ionicons -->
+<link rel="stylesheet" th:href="@{/resources/css/ionicons.min.css}">
+<!-- Theme style -->
+<link rel="stylesheet" th:href="@{/resources/css/admin-lte.css}">   
+<link rel="stylesheet" th:href="@{/resources/css/game/scrabble.css}">
+<!-- iCheck -->
+<link rel="stylesheet" th:href="@{/resources/css/skins/skin-blue.min.css}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Asap">
+<script th:inline="javascript">
+    var _contextPath = /*[[@{/}]]*/;
+</script>
+</head>
+<body class="hold-transition skin-blue sidebar-mini" ng-app="scrabble">
+    <div class="wrapper">
+        <header class="main-header" th:include="header :: header"></header>
+        <aside class="main-sidebar" th:include="sidebar :: sidebar"></aside>
+
+        <div class="content-wrapper">
+            <section class="content" layout:fragment="content"></section>
+        </div>
+        <aside class="main-footer" th:include="footer :: footer"></aside>
+
+        <aside class="control-sidebar" th:include="controlbar :: controlbar"></aside>
+        <div class="control-sidebar-bg"></div>
+    </div>
+    <!-- library -->
+    <script th:src="@{/resources/js/library/jquery.js}"></script>
+    <script th:src="@{/resources/js/library/bootstrap.js}"></script>
+    <script th:src="@{/resources/js/library/admin-lte.js}"></script>
+    <!-- angular -->
+    <script th:src="@{/resources/js/angular/angular.js}"></script>
+    <script th:src="@{/resources/js/angular/angular-route.js}"></script>
+    <script th:src="@{/resources/js/angular/angular-sanitize.js}"></script>
+    <script th:src="@{/resources/js/angular/angular-translate.js}"></script>
+    <!-- scrabble -->
+    <script th:src="@{/resources/js/game/config/scrabble.js}"></script>
+    <script th:src="@{/resources/js/game/config/translation.js}"></script>
+    <script th:src="@{/resources/js/game/config/alert.js}"></script>
+    <!-- services -->
+    <script th:src="@{/resources/js/game/service/base-service.js}"></script>
+    <script th:src="@{/resources/js/game/service/board-service.js}"></script>
+    <script th:src="@{/resources/js/game/service/content-service.js}"></script>
+    <script th:src="@{/resources/js/game/service/chat-service.js}"></script>
+    <!-- controllers -->
+    <script th:src="@{/resources/js/game/controller/create-board-controller.js}"></script>
+    <script th:src="@{/resources/js/game/controller/show-boards-controller.js}"></script>
+    <script th:src="@{/resources/js/game/controller/boards-controller.js}"></script>
+    <script th:src="@{/resources/js/game/controller/my-boards-controller.js}"></script>
+</body>
+</html>

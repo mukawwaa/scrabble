@@ -1,0 +1,26 @@
+<section class="content">
+    <div class="row" ng-show="boards.length > 0">
+        <div class="col-md-4" ng-repeat="board in boards track by $index">
+            <div class="box box-widget widget-user-2">
+                <div class="widget-user-header bg-yellow">
+                    <div class="widget-user-image">
+                        <img class="img-circle" ng-src="/scrabble/image/avatar/{{board.owner.id}}">
+                    </div>
+                    <h3 class="widget-user-username">{{board.name}}</h3>
+                    <button class="btn btn-info" ng-click="watchBoard(board.id)">{{'boards_watch' | translate}}</button>
+                    <button class="btn btn-primary" ng-click="joinBoard(board.id)">{{'boards_join' | translate}}</button>
+                </div>
+                <div class="box-footer no-padding">
+                    <ul class="nav nav-stacked">
+                        <li><a href="#">{{'boards_owner' | translate}} <span class="pull-right badge bg-blue">{{board.owner.username}}</span></a></li>
+                        <li><a href="#">{{'boards_maxUserCount' | translate}} <span class="pull-right badge bg-aqua">{{board.userCount}}</span></a></li>
+                        <li><a href="#">{{'boards_currentUserCount' | translate}} <span class="pull-right badge bg-green">{{board.orderNo}}</span></a></li>
+                        <li><a href="#">{{'boards_duration' | translate}} <span class="pull-right badge bg-red">{{board.duration}}</span></a></li>
+                        <li><a href="#">{{'boards_status' | translate}} <span class="pull-right badge bg-yellow">
+                        {{board.status == 'STARTED' ? ('boards_started' | translate) : board.status == 'WAITING_USERS_TO_JOIN' ? ('boards_waitingUsers' | translate) : board.status == 'TERMINATED' ? ('boards_terminated' | translate) : ('boards_expired' | translate)}}</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

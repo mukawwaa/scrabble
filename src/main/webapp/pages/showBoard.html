@@ -1,0 +1,91 @@
+<section class="content" ng-show="boardStatus == 'STARTED' || boardStatus == 'WAITING_USERS_TO_JOIN'">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="box box-primary">
+                <div class="box-body game-body">
+                    <table class="game-table">
+                        <tbody>
+                            <tr ng-repeat="x in [].constructor(rule.rowSize) track by $index" ng-init="$rowIndex = $index">
+                                <td ng-repeat="y in [].constructor(rule.columnSize) track by $index"
+                                    class="tile-td"
+                                    ng-click="moveRackTile(cells[$rowIndex * rule.columnSize + $index])"
+                                    style="background-color: {{cells[$rowIndex * rule.columnSize + $index].rule.color}}">
+                                    <div ng-show="cells[$rowIndex * rule.columnSize + $index].letter != null" class="tile-div">
+                                        <span class="letter-tile">{{cells[$rowIndex * rule.columnSize + $index].letter}}</span>
+                                        <span class="score-tile">{{cells[$rowIndex * rule.columnSize + $index].score}}</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="box box-primary" ng-show="rack.tiles.length > 0">
+                <div class="box-body table-responsive col-sm-8">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <td ng-repeat="rackTile in rack.tiles"
+                                    class="tile-td"
+                                    ng-click="selectRackTile(rackTile)"
+                                    style="background-color: {{rackTile.used ? 'red' : 'yellow'}}">
+                                    <div class="tile-div">
+                                        <span class="letter-tile">{{rackTile.letter}}</span>
+                                        <span class="score-tile">{{rackTile.score}}</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="box-body col-sm-3 rack-button-body">
+                    <a class="btn btn-app" ng-click="play()"><i class="fa fa-play"></i>{{'showBoard_play' | translate}}</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="box box-primary col-sm-6">
+                <div class="box-body box-profile col-sm-3" ng-repeat="player in players track by $index">
+                    <img class="profile-user-img img-responsive img-circle" ng-src="/scrabble/image/avatar/{{player.userId}}">
+                    <h3 class="profile-username text-center">{{player.username}}<i class="fa fa-fw fa-star" ng-show="player.ownTurn"></i></h3>
+                    <ul class="list-group list-group-unbordered">
+                        <li class="list-group-item"><b>{{'showBoard_points' | translate}}</b><a class="pull-right">{{player.score}}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="box box-primary direct-chat direct-chat-primary col-sm-3">
+                <div class="box-header with-border">
+                    <h3 class="box-title">{{'showBoard_chat_title' | translate}}</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="direct-chat-messages">
+                        <div class="direct-chat-msg" ng-repeat="chat in chats track by $index" ng-class-even="'right'">
+                            <div class="direct-chat-info clearfix">
+                                <span class="direct-chat-name pull-left">{{chat.username}}</span>
+                                <span class="direct-chat-timestamp pull-right">{{chat.createDate * 1000 | date:'dd/MM/yyyy HH:mm:ss'}}</span>
+                            </div>
+                            <img class="direct-chat-img" ng-src="/scrabble/image/avatar/{{chat.userId}}">
+                            <div class="direct-chat-text">{{chat.message}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <div class="input-group">
+                        <input type="text" name="message" placeholder="{{'showBoard_chat_placeHolder' | translate}}" class="form-control" ng-model="inputMessage">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary btn-flat" ng-click="sendMessage()">{{'showBoard_chat_send' | translate}}</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
