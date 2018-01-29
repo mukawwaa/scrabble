@@ -1,10 +1,12 @@
-package com.gamecity.scrabble.listener;
+package com.gamecity.scrabble.controller;
 
 import java.util.Collections;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.stereotype.Controller;
@@ -16,14 +18,14 @@ import org.springframework.web.context.request.async.DeferredResult;
 
 import com.gamecity.scrabble.Constants;
 import com.gamecity.scrabble.Resources;
-import com.gamecity.scrabble.controller.BaseController;
 import com.gamecity.scrabble.model.NotificationKey;
 import com.gamecity.scrabble.model.api.BoardContent;
 
 @Controller
 @RequestMapping("/content")
-public class ContentListener extends BaseController implements MessageListener
+public class ContentController extends BaseController implements MessageListener
 {
+    private static final Logger logger = LoggerFactory.getLogger(ContentController.class);
     private final Map<DeferredResult, NotificationKey> contents = new ConcurrentHashMap<DeferredResult, NotificationKey>();
 
     @RequestMapping(value = "/board/{boardId}/orderNo/{orderNo}", method = RequestMethod.GET)
@@ -68,7 +70,7 @@ public class ContentListener extends BaseController implements MessageListener
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            logger.error("Exception : {} {}", e.getMessage(), e);
         }
     }
 }

@@ -15,8 +15,8 @@ import org.springframework.data.redis.listener.PatternTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 
 import com.gamecity.scrabble.Constants;
-import com.gamecity.scrabble.listener.ChatListener;
-import com.gamecity.scrabble.listener.ContentListener;
+import com.gamecity.scrabble.controller.ChatController;
+import com.gamecity.scrabble.controller.ContentController;
 
 @Configuration
 @EnableCaching
@@ -29,10 +29,10 @@ public class CacheConfig extends CachingConfigurerSupport
     private Integer redisPort;
 
     @Autowired
-    private ChatListener chatController;
+    private ChatController chatController;
 
     @Autowired
-    private ContentListener contentController;
+    private ContentController contentController;
 
     @Bean
     public JedisConnectionFactory redisConnectionFactory()

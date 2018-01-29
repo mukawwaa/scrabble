@@ -1,4 +1,4 @@
-package com.gamecity.scrabble.listener;
+package com.gamecity.scrabble.controller;
 
 import java.util.Collections;
 import java.util.List;
@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.stereotype.Controller;
@@ -17,14 +19,14 @@ import org.springframework.web.context.request.async.DeferredResult;
 
 import com.gamecity.scrabble.Constants;
 import com.gamecity.scrabble.Resources;
-import com.gamecity.scrabble.controller.BaseController;
 import com.gamecity.scrabble.model.NotificationKey;
 import com.gamecity.scrabble.model.api.ChatMessage;
 
 @Controller
 @RequestMapping("/chat")
-public class ChatListener extends BaseController implements MessageListener
+public class ChatController extends BaseController implements MessageListener
 {
+    private static final Logger logger = LoggerFactory.getLogger(ChatController.class);
     private final Map<DeferredResult<List>, NotificationKey> chatMessages = new ConcurrentHashMap<DeferredResult<List>, NotificationKey>();
 
     @RequestMapping(value = "/board/{boardId}/orderNo/{orderNo}", method = RequestMethod.GET)
@@ -55,14 +57,22 @@ public class ChatListener extends BaseController implements MessageListener
     @Override
     public void onMessage(Message message, byte[] pattern)
     {
-        for (Entry<DeferredResult<List>, NotificationKey> entry : chatMessages.entrySet())
+        try
         {
-            List newMessages = listNotificationsByCriteria(Resources.ChatResource.messages, ChatMessage.class, entry.getValue().getBoardId(),
-                    entry.getValue().getOrderNo());
-            if (newMessages != null)
+            for (Entry<DeferredResult<List>, NotificationKey> entry : chatMessages.entrySet())
             {
-                entry.getKey().setResult(newMessages);
+                List newMessages =
+                    listNotificationsByCriteria(
+                        Resources.ChatResource.messages, ChatMessage.class, entry.getValue().getBoardId(), entry.getValue().getOrderNo());
+                if (newMessages != null)
+                {
+                    entry.getKey().setResult(newMessages);
+                }
             }
+        }
+        catch (Exception e)
+        {
+            logger.error("Exception : {} {}", e.getMessage(), e);
         }
     }
 }

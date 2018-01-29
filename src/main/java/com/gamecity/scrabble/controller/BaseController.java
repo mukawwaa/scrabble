@@ -1,7 +1,6 @@
 package com.gamecity.scrabble.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,8 +15,6 @@ import com.gamecity.scrabble.service.RestService;
 
 public abstract class BaseController
 {
-    protected Map<String, Object> valueMap;
-
     @Value("${redis.listener.user}")
     private String redisListenerUsername;
 
@@ -28,25 +25,25 @@ public abstract class BaseController
     private RestService restService;
 
     // authenticated user username
-    protected String getUsername()
+    private String getUsername()
     {
         AbstractAuthenticationToken auth = (AbstractAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
         return auth == null ? null : ((User) auth.getPrincipal()).getUsername();
     }
 
     // authenticated user password
-    protected String getPassword()
+    private String getPassword()
     {
         Object credentials = SecurityContextHolder.getContext().getAuthentication().getCredentials();
         return credentials == null ? null : credentials.toString();
     }
 
-    protected UserLogin getUserLogin()
+    private UserLogin getUserLogin()
     {
         return new UserLogin(getUsername(), getPassword());
     }
 
-    protected UserLogin getNotificationLogin()
+    private UserLogin getNotificationLogin()
     {
         return new UserLogin(redisListenerUsername, redisListenerPassword);
     }
@@ -95,7 +92,6 @@ public abstract class BaseController
         return (T) restService.postEntityWithAuth(resource, getUserLogin(), clazz, item, params);
     }
 
-    // post
     protected <T> List<T> postWithListReturn(String resource, Class clazz, Object item, Object... params)
     {
         return (List<T>) restService.postEntityReturnListWithAuth(resource, getUserLogin(), clazz, item, params);

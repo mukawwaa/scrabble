@@ -26,7 +26,6 @@ public class GameExceptionHandler extends ResponseEntityExceptionHandler
         }
         else
         {
-            e.printStackTrace();
             return handleExceptionInternal(e, e.getMessage(), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
         }
     }
