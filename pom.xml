@@ -17,7 +17,6 @@
         <jedis.version>2.9.0</jedis.version>
         <jersey.version>1.19.4</jersey.version>
         <jstl.version>1.2</jstl.version>
-        <lettuce.version>5.0.1.RELEASE</lettuce.version>
         <logback.version>1.2.3</logback.version>
         <spring.data.version>2.0.2.RELEASE</spring.data.version>
         <spring.framework.version>5.0.2.RELEASE</spring.framework.version>
@@ -50,11 +49,6 @@
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-data-redis</artifactId>
             <version>${spring.session.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.lettuce</groupId>
-            <artifactId>lettuce-core</artifactId>
-            <version>${lettuce.version}</version>
         </dependency>
         <!-- spring framework -->
         <dependency>

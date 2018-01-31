@@ -44,11 +44,8 @@ public class RestServiceImpl implements RestService
     {
         try
         {
-            StringBuilder authLink =
-                new StringBuilder()
-                    .append(authApi).append("?grant_type=password").append("&username=").append(login.getUsername()).append("&password=")
-                    .append(login.getPassword());
-            URL url = new URL(authLink.toString());
+            String authLink = String.format(authApi, login.getUsername(), login.getPassword());
+            URL url = new URL(authLink);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
             String basicAuth = "Basic " + new String(new Base64().encode(Constants.AUTH_CREDENTIALS.getBytes()));
