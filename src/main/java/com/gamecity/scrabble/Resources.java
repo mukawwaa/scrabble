@@ -55,6 +55,7 @@ public interface Resources
     interface ContentResource
     {
         String rack = Services.content.resource + "/rack/user/{userId}";
+        String players = Services.content.resource + "/players/orderNo/{orderNo}";
         String content = Services.content.resource + "/orderNo/{orderNo}";
     }
 

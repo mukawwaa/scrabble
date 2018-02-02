@@ -92,11 +92,6 @@ public abstract class BaseController
         return (T) restService.postEntityWithAuth(resource, getUserLogin(), clazz, item, params);
     }
 
-    protected <T> List<T> postWithListReturn(String resource, Class clazz, Object item, Object... params)
-    {
-        return (List<T>) restService.postEntityReturnListWithAuth(resource, getUserLogin(), clazz, item, params);
-    }
-
     protected <T> List<T> listByCriteria(String resource, Class clazz, Object... params)
     {
         return (List<T>) restService.getEntityListWithAuth(resource, getUserLogin(), clazz, params);

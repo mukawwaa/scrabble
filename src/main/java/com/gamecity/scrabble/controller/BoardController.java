@@ -34,14 +34,14 @@ public class BoardController extends BaseController
     @ResponseBody
     public void join(@PathVariable Long boardId)
     {
-        post(Resources.BoardResource.join, Integer.class, null, boardId, getUserId());
+        post(Resources.BoardResource.join, null, null, boardId, getUserId());
     }
 
     @RequestMapping(value = "/{boardId}/leave", method = RequestMethod.POST)
     @ResponseBody
     public void leave(@PathVariable Long boardId)
     {
-        post(Resources.BoardResource.leave, Integer.class, null, boardId, getUserId());
+        post(Resources.BoardResource.leave, null, null, boardId, getUserId());
     }
 
     @RequestMapping(value = "/{boardId}/play", method = RequestMethod.POST)
@@ -49,7 +49,7 @@ public class BoardController extends BaseController
     public void play(@PathVariable Long boardId, @RequestBody Rack rack)
     {
         rack.setUserId(getUserId());
-        post(Resources.GameResource.play, Integer.class, rack);
+        post(Resources.GameResource.play, null, rack);
     }
 
     @RequestMapping(value = "/{boardId}/sendMessage", method = RequestMethod.POST)

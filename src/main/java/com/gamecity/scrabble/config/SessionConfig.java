@@ -40,18 +40,18 @@ public class SessionConfig extends AbstractHttpSessionApplicationInitializer
     }
 
     @Bean
-    public RedisTemplate<String, String> redisTemplate(JedisConnectionFactory factory)
+    public RedisTemplate redisTemplate(JedisConnectionFactory connectionFactory)
     {
-        RedisTemplate<String, String> redisTemplate = new RedisTemplate<String, String>();
-        redisTemplate.setConnectionFactory(factory);
+        RedisTemplate redisTemplate = new RedisTemplate();
+        redisTemplate.setConnectionFactory(connectionFactory);
         return redisTemplate;
     }
 
     @Bean
-    public RedisMessageListenerContainer redisMessageListenerContainer(JedisConnectionFactory factory)
+    public RedisMessageListenerContainer redisMessageListenerContainer(JedisConnectionFactory connectionFactory)
     {
         RedisMessageListenerContainer messageListenerContainer = new RedisMessageListenerContainer();
-        messageListenerContainer.setConnectionFactory(factory);
+        messageListenerContainer.setConnectionFactory(connectionFactory);
         messageListenerContainer.addMessageListener(chatController, new PatternTopic(Constants.RedisListener.BOARD_CHAT));
         messageListenerContainer.addMessageListener(contentController, new PatternTopic(Constants.RedisListener.BOARD_CONTENT));
         return messageListenerContainer;

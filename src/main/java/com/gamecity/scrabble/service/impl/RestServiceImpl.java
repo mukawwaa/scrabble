@@ -1,7 +1,5 @@
 package com.gamecity.scrabble.service.impl;
 
-import static com.gamecity.scrabble.Constants.HTTP;
-
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -14,12 +12,15 @@ import java.util.Map;
 import java.util.function.IntConsumer;
 import java.util.stream.IntStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import com.gamecity.scrabble.Constants;
+import com.gamecity.scrabble.Constants.HTTP;
 import com.gamecity.scrabble.model.AuthToken;
 import com.gamecity.scrabble.model.UserLogin;
 import com.gamecity.scrabble.service.RestService;
@@ -29,6 +30,8 @@ import com.sun.jersey.core.util.Base64;
 @Component
 public class RestServiceImpl implements RestService
 {
+    private static final Logger logger = LoggerFactory.getLogger(RestServiceImpl.class);
+
     @Autowired
     private RestService restService;
 
@@ -96,6 +99,7 @@ public class RestServiceImpl implements RestService
     {
         try
         {
+            logger.info("Rest api to call : {}", resource);
             HttpURLConnection conn = createConnection(resource, login, params);
             conn.setRequestMethod(method.name());
             props.entrySet().forEach(entry -> conn.setRequestProperty(entry.getKey(), entry.getValue()));

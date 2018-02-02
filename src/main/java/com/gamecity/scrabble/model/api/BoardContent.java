@@ -9,7 +9,6 @@ public class BoardContent
 {
     private Long boardId;
     private Long ruleId;
-    private List<Player> players;
     private List<BoardCell> cells;
     private BoardStatus status;
     private Integer orderNo;
@@ -33,16 +32,6 @@ public class BoardContent
     public void setRuleId(Long ruleId)
     {
         this.ruleId = ruleId;
-    }
-
-    public List<Player> getPlayers()
-    {
-        return players;
-    }
-
-    public void setPlayers(List<Player> players)
-    {
-        this.players = players;
     }
 
     public List<BoardCell> getCells()
