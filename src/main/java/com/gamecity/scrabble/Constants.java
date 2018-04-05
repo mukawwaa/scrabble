@@ -15,6 +15,7 @@ public interface Constants
     {
         String BOARD_CHAT = "BOARD_CHAT";
         String BOARD_CONTENT = "BOARD_CONTENT";
+        String BOARD_PLAYERS = "BOARD_PLAYERS";
     }
 
     interface HTTP

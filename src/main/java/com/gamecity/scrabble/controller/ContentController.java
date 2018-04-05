@@ -18,8 +18,8 @@ import org.springframework.web.context.request.async.DeferredResult;
 
 import com.gamecity.scrabble.Constants;
 import com.gamecity.scrabble.Resources;
+import com.gamecity.scrabble.api.model.BoardContent;
 import com.gamecity.scrabble.model.NotificationKey;
-import com.gamecity.scrabble.model.api.BoardContent;
 
 @Controller
 @RequestMapping("/content")

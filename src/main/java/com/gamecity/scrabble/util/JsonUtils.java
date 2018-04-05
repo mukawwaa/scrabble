@@ -9,9 +9,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import com.gamecity.scrabble.api.exception.ScrabbleException;
+import com.gamecity.scrabble.api.response.GameResponse;
 import com.gamecity.scrabble.model.AuthToken;
-import com.gamecity.scrabble.model.api.GameException;
-import com.gamecity.scrabble.model.api.GameResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -118,7 +118,7 @@ public class JsonUtils
         GameResponse response = gsonBuilder.fromJson(jsonString, GameResponse.class);
         if (response.getResponseCode() != 200)
         {
-            throw new GameException(response.getResponseCode(), response.getResponseMessage());
+            throw new ScrabbleException(response.getResponseCode(), response.getResponseMessage());
         }
     }
 

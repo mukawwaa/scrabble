@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.gamecity.scrabble.Resources;
 import com.gamecity.scrabble.Resources.Services;
-import com.gamecity.scrabble.model.api.Board;
-import com.gamecity.scrabble.model.api.BoardParams;
-import com.gamecity.scrabble.model.api.Rack;
+import com.gamecity.scrabble.api.model.Board;
+import com.gamecity.scrabble.api.model.BoardParams;
+import com.gamecity.scrabble.api.model.Rack;
 
 @RestController
 @RequestMapping(value = "/board")

@@ -31,6 +31,7 @@ import nz.net.ultraq.thymeleaf.LayoutDialect;
 @EnableWebMvc
 @ComponentScan(basePackages = "com.gamecity.scrabble")
 @PropertySource("classpath:application.properties")
+@PropertySource("classpath:image.properties")
 public class WebConfig implements WebMvcConfigurer, ApplicationContextAware
 {
     private ApplicationContext applicationContext;

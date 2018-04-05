@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -15,9 +16,11 @@ import org.springframework.session.web.context.AbstractHttpSessionApplicationIni
 import com.gamecity.scrabble.Constants;
 import com.gamecity.scrabble.controller.ChatController;
 import com.gamecity.scrabble.controller.ContentController;
+import com.gamecity.scrabble.controller.PlayerController;
 
 @Configuration
 @EnableRedisHttpSession
+@PropertySource("classpath:redis.properties")
 public class SessionConfig extends AbstractHttpSessionApplicationInitializer
 {
     @Value("${redis.host}")
@@ -31,6 +34,9 @@ public class SessionConfig extends AbstractHttpSessionApplicationInitializer
 
     @Autowired
     private ContentController contentController;
+
+    @Autowired
+    private PlayerController playerController;
 
     @Bean
     public JedisConnectionFactory connectionFactory()
@@ -54,6 +60,7 @@ public class SessionConfig extends AbstractHttpSessionApplicationInitializer
         messageListenerContainer.setConnectionFactory(connectionFactory);
         messageListenerContainer.addMessageListener(chatController, new PatternTopic(Constants.RedisListener.BOARD_CHAT));
         messageListenerContainer.addMessageListener(contentController, new PatternTopic(Constants.RedisListener.BOARD_CONTENT));
+        messageListenerContainer.addMessageListener(playerController, new PatternTopic(Constants.RedisListener.BOARD_PLAYERS));
         return messageListenerContainer;
     }
 }

@@ -18,7 +18,7 @@
                         <li><a href="#">{{'boards_currentUserCount' | translate}} <span class="pull-right badge bg-green">{{board.turnNumber}}</span></a></li>
                         <li><a href="#">{{'boards_duration' | translate}} <span class="pull-right badge bg-red">{{board.duration}}</span></a></li>
                         <li><a href="#">{{'boards_status' | translate}} <span class="pull-right badge bg-yellow">
-                        {{board.status == 'STARTED' ? ('boards_started' | translate) : board.status == 'WAITING_USERS_TO_JOIN' ? ('boards_waitingUsers' | translate) : board.status == 'TERMINATED' ? ('boards_terminated' | translate) : ('boards_expired' | translate)}}</span></a></li>
+                        {{board.status == 'STARTED' ? ('boards_started' | translate) : board.status == 'WAITING_PLAYERS' ? ('boards_waitingUsers' | translate) : board.status == 'TERMINATED' ? ('boards_terminated' | translate) : ('boards_expired' | translate)}}</span></a></li>
                     </ul>
                 </div>
             </div>

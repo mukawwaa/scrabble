@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.gamecity.scrabble.Resources;
+import com.gamecity.scrabble.api.model.User;
 import com.gamecity.scrabble.model.UserLogin;
-import com.gamecity.scrabble.model.api.User;
 import com.gamecity.scrabble.service.RestService;
 
 @Component

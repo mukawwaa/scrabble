@@ -19,8 +19,8 @@ import org.springframework.web.context.request.async.DeferredResult;
 
 import com.gamecity.scrabble.Constants;
 import com.gamecity.scrabble.Resources;
+import com.gamecity.scrabble.api.model.ChatMessage;
 import com.gamecity.scrabble.model.NotificationKey;
-import com.gamecity.scrabble.model.api.ChatMessage;
 
 @Controller
 @RequestMapping("/chat")

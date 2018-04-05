@@ -1,4 +1,4 @@
-angular.module('scrabble').controller("ShowBoardController", function ($rootScope, $scope, $routeParams, alertService, BaseService, BoardService, ContentService, ChatService) {
+angular.module('scrabble').controller("ShowBoardController", function ($rootScope, $scope, $routeParams, alertService, BaseService, BoardService, ContentService, ChatService, PlayerService) {
     'use strict';
 	alertService.clear();
     $scope.boardId;
@@ -6,6 +6,7 @@ angular.module('scrabble').controller("ShowBoardController", function ($rootScop
     $scope.rack;
     $scope.rule;
     $scope.boardOrderNo;
+    $scope.playersOrderNo = 1;
     $scope.selectedRackTile;
     $scope.inputMessage;
     $scope.cells = [];
@@ -21,10 +22,11 @@ angular.module('scrabble').controller("ShowBoardController", function ($rootScop
                     $scope.boardStatus = board.status;
                     $scope.boardOrderNo = board.orderNo;
                     getContent();
+                    getPlayers();
+                    getMessages();
                     if (board.status == 'STARTED') {
                         alertService.success('boards_started');
-                        getMessages();
-                    } else if (board.status == 'WAITING_USERS_TO_JOIN') {
+                    } else if (board.status == 'WAITING_PLAYERS') {
                         alertService.info('boards_waitingUsers');
                     }
                 }
@@ -51,14 +53,28 @@ angular.module('scrabble').controller("ShowBoardController", function ($rootScop
             function (content) {
                 if (content != null && content.boardId != null && content.boardId == $scope.boardId) {
                     $scope.cells = content.cells;
-                    $scope.players = content.players;
                     $scope.boardStatus = content.status;
                     $scope.boardOrderNo = $scope.boardOrderNo + 1;
                     if (content.status == 'STARTED') {
-                    	getRack();
+                        getRack();
                     }
                 }
                 getContent();
+            },
+            function (errResponse) {
+                console.error(errResponse);
+            }
+        );
+    };
+
+    var getPlayers = function() {
+        PlayerService.getPlayers($scope.boardId, $scope.playersOrderNo).then(
+            function (playerContent) {
+                if (playerContent != null && playerContent.boardId != null && playerContent.boardId == $scope.boardId) {
+                    $scope.players = playerContent.players;
+                    $scope.playersOrderNo = $scope.playersOrderNo + 1;
+                }
+                getPlayers();
             },
             function (errResponse) {
                 console.error(errResponse);

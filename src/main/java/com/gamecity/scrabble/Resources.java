@@ -1,7 +1,7 @@
 package com.gamecity.scrabble;
 
-import com.gamecity.scrabble.model.api.Board;
-import com.gamecity.scrabble.model.api.User;
+import com.gamecity.scrabble.api.model.Board;
+import com.gamecity.scrabble.api.model.User;
 
 public interface Resources
 {
