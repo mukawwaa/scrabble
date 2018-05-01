@@ -8,7 +8,7 @@ angular.module('scrabble').controller("BoardsController", function ($rootScope, 
         function (response) {
             $scope.boards = response;
             if (response.length == 0) {
-            	alertService.warning('boards_empty');
+                alertService.warning('boards_empty');
             }
         },
         function (errResponse) {
@@ -22,7 +22,7 @@ angular.module('scrabble').controller("BoardsController", function ($rootScope, 
                 $location.path('/v/showBoard').search({id: boardId});
             },
             function (errResponse) {
-            	alertService.gameError(errResponse.data.responseCode);
+            	    alertService.gameError(errResponse.data.responseCode);
             }
         );
     };

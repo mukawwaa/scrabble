@@ -20,9 +20,9 @@ public class GameExceptionHandler extends ResponseEntityExceptionHandler
     {
         if (e instanceof ScrabbleException)
         {
-            ScrabbleException ge = (ScrabbleException) e;
-            GameResponse response = new GameResponse(ge.getErrorCode(), ge.getErrorMessage());
-            return handleExceptionInternal(ge, JsonUtils.convertToJson(response), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
+            ScrabbleException se = (ScrabbleException) e;
+            GameResponse response = new GameResponse(se.getErrorCode(), se.getErrorMessage());
+            return handleExceptionInternal(se, JsonUtils.convertToJson(response), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
         }
         else
         {

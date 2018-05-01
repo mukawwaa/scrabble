@@ -1,0 +1,15 @@
+version: '2.1'
+services:
+  scrabble:
+    image: tomcat:8.5.8
+    container_name: scrabble
+    volumes:
+     - ./target/scrabble.war:/usr/local/tomcat/webapps/scrabble.war
+     - ./src/main/resources/user/:/tmp/scrabble-data/user
+    ports:
+     - "80:8080"
+    networks:
+     - scrabble-backend
+networks:
+    scrabble-backend:
+      external: true

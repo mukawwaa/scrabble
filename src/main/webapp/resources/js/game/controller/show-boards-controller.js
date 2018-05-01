@@ -143,11 +143,11 @@ angular.module('scrabble').controller("ShowBoardController", function ($rootScop
                 alert('Cell is not empty!');
                 $scope.selectedRackTile = null;
             }
-        } else if (cell.letter != null) {
-            $scope.rack.tiles[cell.tileNumber].used = false;
-            $scope.rack.tiles[cell.tileNumber].cellNumber = null;
-            $scope.rack.tiles[cell.tileNumber].rowNumber = null;
-            $scope.rack.tiles[cell.tileNumber].columnNumber = null;
+        } else if (cell.letter != null && cell.tileNumber != null) {
+            $scope.rack.tiles[cell.tileNumber - 1].used = false;
+            $scope.rack.tiles[cell.tileNumber - 1].cellNumber = null;
+            $scope.rack.tiles[cell.tileNumber - 1].rowNumber = null;
+            $scope.rack.tiles[cell.tileNumber - 1].columnNumber = null;
             cell.letter = null;
             cell.tileNumber = null;
             cell.score = null;

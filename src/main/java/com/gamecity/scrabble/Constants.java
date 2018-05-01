@@ -34,4 +34,14 @@ public interface Constants
         String MAX_AGE = "Access-Control-Max-Age";
         String ALLOW_HEADERS = "Access-Control-Allow-Headers";
     }
+
+    interface RequestHeaders
+    {
+
+        String AUTHORIZATION = "Authorization";
+        String ACCEPT = "Accept";
+        String CONTENT_LENGTH = "Content-Length";
+        String CONTENT_TYPE = "Content-Type";
+        
+    }
 }

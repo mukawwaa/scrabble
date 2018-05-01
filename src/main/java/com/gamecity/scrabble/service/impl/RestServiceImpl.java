@@ -17,10 +17,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
 import com.gamecity.scrabble.Constants;
 import com.gamecity.scrabble.Constants.HTTP;
+import com.gamecity.scrabble.Constants.RequestHeaders;
 import com.gamecity.scrabble.model.AuthToken;
 import com.gamecity.scrabble.model.UserLogin;
 import com.gamecity.scrabble.service.RestService;
@@ -52,9 +54,10 @@ public class RestServiceImpl implements RestService
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
             String basicAuth = "Basic " + new String(new Base64().encode(Constants.AUTH_CREDENTIALS.getBytes()));
-            conn.setRequestProperty("Authorization", basicAuth);
+            conn.setRequestProperty(RequestHeaders.AUTHORIZATION, basicAuth);
             conn.setRequestMethod(HTTP.Method.POST.name());
-            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty(RequestHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE);
+            conn.setRequestProperty(RequestHeaders.CONTENT_LENGTH, "" + basicAuth.getBytes("UTF-8").length);
 
             String jsonString = buildResponse(conn);
             return JsonUtils.convertToEntity(jsonString, AuthToken.class);
@@ -103,12 +106,12 @@ public class RestServiceImpl implements RestService
             HttpURLConnection conn = createConnection(resource, login, params);
             conn.setRequestMethod(method.name());
             props.entrySet().forEach(entry -> conn.setRequestProperty(entry.getKey(), entry.getValue()));
-            conn.setDoOutput(HTTP.Method.POST.equals(method));
+            conn.setDoOutput(HTTP.Method.POST == method);
 
             if (HTTP.Method.POST.equals(method) && item != null)
             {
                 String jsonString = JsonUtils.convertToJson(item);
-                conn.setRequestProperty("Content-Length", "" + String.valueOf(jsonString.getBytes("UTF-8").length));
+                conn.setRequestProperty(RequestHeaders.CONTENT_LENGTH, "" + jsonString.getBytes("UTF-8").length);
                 DataOutputStream daos = new DataOutputStream(conn.getOutputStream());
                 daos.write(jsonString.getBytes("UTF-8"));
                 daos.flush();
@@ -125,15 +128,15 @@ public class RestServiceImpl implements RestService
     private String callJsonGetServiceWithAuth(String resource, UserLogin login, Object... params)
     {
         Map<String, String> requestProperties = new HashMap<String, String>();
-        requestProperties.put("Accept", "application/json");
+        requestProperties.put(RequestHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE);
         return callServiceWithAuth(resource, login, HTTP.Method.GET, requestProperties, null, params);
     }
 
     private <T> String callJsonPostServiceWithAuth(String resource, UserLogin login, T object, Object... params)
     {
         Map<String, String> requestProperties = new HashMap<String, String>();
-        requestProperties.put("Accept", "application/json");
-        requestProperties.put("Content-Type", "application/json");
+        requestProperties.put(RequestHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE);
+        requestProperties.put(RequestHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         return callServiceWithAuth(resource, login, HTTP.Method.POST, requestProperties, object, params);
     }
 
